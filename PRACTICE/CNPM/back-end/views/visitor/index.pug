@@ -1,0 +1,12 @@
+h1 VISITOR
+p Welcome
+
+ul
+  each visitor in listVisitor
+    li= visitor._id
+    li= visitor.name
+    li= visitor.age
+
+a(href="/visitor/create") Create visitor
+a(href="/visitor/update") Update visitor
+a(href="/visitor/delete") Delete visitor 
