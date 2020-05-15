@@ -1,9 +1,12 @@
-h1 Create visitor
+extends ../layouts/common.pug
 
-form(action="/visitor/create", method="POST")
-    label Name:
-    input(type="text", name="name", value="")
-    label Age:
-    input(type="text", name="age", value="")
+block content
+    h1 Create visitor
+
+    form(action="/visitor/create", method="POST")
+        label Name:
+        input(type="text", name="name", value="")
+        label Age:
+        input(type="text", name="age", value="")
     
-    button Create
+        button Create

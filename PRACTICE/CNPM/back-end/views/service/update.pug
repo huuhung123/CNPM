@@ -1,13 +1,16 @@
-h1 UPDATE SERVICE
-p ID: #{service._id}
+extends ../layouts/common.pug
 
-form(action="/service/update/" + service._id, method="POST")
-    label Name: 
-    input(type="text", name="name", value="")
-    label Service:
-    input(type="text", name="age", value="")
-    label Phone:
-    input(type="text", name="phone", value="")
-    label Place:
-    input(type="text", name="place", value="")
-    button Create 
+block content
+    h1 UPDATE SERVICE
+    p ID: #{service._id}
+
+    form(action="/service/update/" + service._id, method="POST")
+        label Name: 
+        input(type="text", name="name", value="")
+        label Service:
+        input(type="text", name="age", value="")
+        label Phone:
+        input(type="text", name="phone", value="")
+        label Place:
+        input(type="text", name="place", value="")
+        button Create 

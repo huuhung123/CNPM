@@ -1,9 +1,12 @@
-h1 UPDATE VISITOR
+extends ../layouts/common.pug
 
-form(action="/visitor/update/" + visitor._id, method="POST")
-    label Name:
-    input(type="text", name="name", value="")
-    label Age:
-    input(type="text", name="age", value="")
-    
-    button Create
+block content
+    h1 UPDATE VISITOR
+
+    form(action="/visitor/update/" + visitor._id, method="POST")
+        label Name:
+        input(type="text", name="name", value="")
+        label Age:
+        input(type="text", name="age", value="")
+        
+        button Create

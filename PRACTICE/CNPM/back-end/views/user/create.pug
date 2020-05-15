@@ -1,10 +1,13 @@
-h1 Create user
+extends ../layouts/common.pug
 
-form(action="/user/create", method="POST")
-    label User:
-    input(type="text", name="user", value="")
-    label Password:
-    input(type="password", name="password", value="")
-    label Confirm:
-    input(type="password", name="confirm", value="")
-    button Create
+block content
+    h1 Create user
+
+    form(action="/user/create", method="POST")
+        label User:
+        input(type="text", name="user", value="")
+        label Password:
+        input(type="password", name="password", value="")
+        label Confirm:
+        input(type="password", name="confirm", value="")
+        button Create

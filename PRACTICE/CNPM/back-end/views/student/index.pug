@@ -1,21 +1,24 @@
-h1 STUDENT
-p Welcome
+extends ../layouts/common.pug
 
-form(action="/student/search", method="GET")
-  input(type="text", name="q")
-  button Search
+block content
+  h1 STUDENT
+  p Welcome
 
-ul
-  each student in listStudent
-    li= student._id
-    li= student.name
-    li= student.age
+  form(action="/student/search", method="GET")
+    input(type="text", name="q")
+    button Search
 
-ul
-  each student in listStudent
-    a(href="/student/update/" + student._id)
-      li Update
-    a(href="/student/delete/" + student._id)
-      li Delete
+  ul
+    each student in listStudent
+      li= student._id
+      li= student.name
+      li= student.age
 
-a(href="/student/create") Create student
+  ul
+    each student in listStudent
+      a(href="/student/update/" + student._id)
+        li Update
+      a(href="/student/delete/" + student._id)
+        li Delete
+
+  a(href="/student/create") Create student

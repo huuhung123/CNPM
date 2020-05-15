@@ -1,23 +1,26 @@
-h1 DUTY
-p Welcome
+extends ../layouts/common.pug
 
-form(action="/duty/search", method="GET")
-  input(type="text", name="q")
-  button Search
+block content
+  h1 DUTY
+  p Welcome
 
-ul
-  each duty in listDuty
-    li= duty.name
-    li= duty.time
-    li= duty.phone
-    li= duty.place
+  form(action="/duty/search", method="GET")
+    input(type="text", name="q")
+    button Search
 
-ul
-  each duty in listDuty
-    a(href="/duty/update/" + duty._id)
-      li Update
-    a(href="/duty/delete/" + duty._id)
-      li Delete
+  ul
+    each duty in listDuty
+      li= duty.name
+      li= duty.time
+      li= duty.phone
+      li= duty.place
 
-a(href="/duty/create") Create duty
-a(href="/duty/search") Search duty
+  ul
+    each duty in listDuty
+      a(href="/duty/update/" + duty._id)
+        li Update
+      a(href="/duty/delete/" + duty._id)
+        li Delete
+
+  a(href="/duty/create") Create duty
+  

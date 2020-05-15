@@ -1,22 +1,25 @@
-h1 VISITOR
-p Welcome
+extends ../layouts/common.pug
 
-form(action="/visitor/search", method="GET")
-  input(type="text", name="q")
-  button Search
+block content
+  h1 VISITOR
+  p Welcome
 
-ul
-  each visitor in listVisitor
-    li= visitor._id
-    li= visitor.name
-    li= visitor.age
+  form(action="/visitor/search", method="GET")
+    input(type="text", name="q")
+    button Search
 
-ul
-  each visitor in listVisitor
-    a(href="/visitor/update/" + visitor._id)
-      li Update
-    a(href="/visitor/delete/" + visitor._id)
-      li Delete
+  ul
+    each visitor in listVisitor
+      li= visitor._id
+      li= visitor.name
+      li= visitor.age
 
-a(href="/visitor/create") Create visitor
+  ul
+    each visitor in listVisitor
+      a(href="/visitor/update/" + visitor._id)
+        li Update
+      a(href="/visitor/delete/" + visitor._id)
+        li Delete
+
+  a(href="/visitor/create") Create visitor
 
