@@ -32,5 +32,22 @@ module.exports.postCreate = (req, res) => {
 };
 
 module.exports.getLogin = (req, res) => {
-  res.send("<p>Waiting...</p>");
+  res.render("user/login");
+};
+
+module.exports.postLogin = (req, res) => {
+  User.find({ user: req.body.user }, (err, user) => {
+    if (err) {
+      res.sendStatus(400);
+    } else {
+      const hashPassword = user[0].password;
+      bcrypt.compare(res.body.password, hashPassword, (err, result) => {
+        if (result == true) {
+          console.log("Login successfully");
+        } else {
+          console.log("Login failed");
+        }
+      });
+    }
+  });
 };

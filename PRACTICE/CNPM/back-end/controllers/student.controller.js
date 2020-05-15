@@ -63,9 +63,55 @@ module.exports.postCreate = (req, res) => {
 };
 
 module.exports.getUpdate = (req, res) => {
-  res.render("student/update");
+  Student.findById(req.params.id, (err, student) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("student/update", {
+        student: student
+      });
+    }
+  });
 };
 
+module.exports.postUpdate = (req, res) => {
+  const updatedStudent = {};
+  updatedStudent.name = req.body.name;
+  updatedStudent.age = req.body.age;
+
+  const query = { _id: req.params.id };
+
+  Student.update(query, updatedStudent, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/student");
+    }
+  });
+}
+
 module.exports.getDelete = (req, res) => {
-  res.render("student/delete");
-};
+  const queryDel = { _id: req.params.id }
+  Student.remove(queryDel, (err) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.redirect('/student')
+    }
+  })
+}
+
+module.exports.getSearch = (req, res) => {
+  const question = req.query.q;
+   Student.find().or([{name: question}, {age: question}])
+   .then(matchedStudent => {
+     res.render("student/index", {
+       listStudent: matchedStudent
+     })
+  })
+   .catch(err => console.log(err))
+  //   var matchedDuty =  db.get('users').filter(function(user) {
+  //       return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
+  //   })
+}

@@ -1,12 +1,21 @@
 h1 STUDENT
 p Welcome
 
+form(action="/student/search", method="GET")
+  input(type="text", name="q")
+  button Search
+
 ul
   each student in listStudent
     li= student._id
     li= student.name
     li= student.age
 
+ul
+  each student in listStudent
+    a(href="/student/update/" + student._id)
+      li Update
+    a(href="/student/delete/" + student._id)
+      li Delete
+
 a(href="/student/create") Create student
-a(href="/student/update") Update student
-a(href="/student/delete") Delete student

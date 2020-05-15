@@ -1,0 +1,29 @@
+h1 SERVICE
+p Welcome
+
+form(action="/service/search", method="GET")
+  input(type="text", name="q")
+  button Search
+
+ul
+  each service in listService
+    li= service.name
+    li= service.service
+    li= service.phone
+    li= service.place
+
+ul
+  each service in listService
+    a(href="/service/update/" + service._id)
+      li Update
+    a(href="/service/delete/" + service._id)
+      li Delete
+
+a(href="/service/create") Create service
+
+
+
+
+
+
+

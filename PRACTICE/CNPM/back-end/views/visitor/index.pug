@@ -1,12 +1,22 @@
 h1 VISITOR
 p Welcome
 
+form(action="/visitor/search", method="GET")
+  input(type="text", name="q")
+  button Search
+
 ul
   each visitor in listVisitor
     li= visitor._id
     li= visitor.name
     li= visitor.age
 
+ul
+  each visitor in listVisitor
+    a(href="/visitor/update/" + visitor._id)
+      li Update
+    a(href="/visitor/delete/" + visitor._id)
+      li Delete
+
 a(href="/visitor/create") Create visitor
-a(href="/visitor/update") Update visitor
-a(href="/visitor/delete") Delete visitor 
+

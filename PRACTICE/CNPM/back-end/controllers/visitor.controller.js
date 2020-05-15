@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Visitor = require("../models/visitor.model");
 
-
 // module.exports.getIndex = (req, res) => {
 
 //   res.render("visitor/index", {
@@ -14,7 +13,7 @@ module.exports.getIndex = (req, res) => {
       console.log(err);
     } else {
       res.render("visitor/index", {
-        listVisitor: visitors
+        listVisitor: visitors,
       });
     }
   });
@@ -50,22 +49,65 @@ module.exports.postCreate = (req, res) => {
   // listVisitor: newlistVisitor,
   // });
 
-  const newVisitor = new Visitor()
-  newVisitor.name = req.body.name
-  newVisitor.age = Number(req.body.age)
+  const newVisitor = new Visitor();
+  newVisitor.name = req.body.name;
+  newVisitor.age = Number(req.body.age);
   newVisitor.save((err) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-      res.redirect('/visitor')  
+      res.redirect("/visitor");
     }
-  })
+  });
 };
 
 module.exports.getUpdate = (req, res) => {
-  res.render("visitor/update");
+  Visitor.findById(req.params.id, (err, visitor) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("visitor/update", {
+        visitor: visitor,
+      });
+    }
+  });
+};
+
+module.exports.postUpdate = (req, res) => {
+  const updatedVisitor = {};
+  updatedVisitor.name = req.body.name;
+  updatedVisitor.age = req.body.age;
+
+  const query = { _id: req.params.id };
+
+  Visitor.update(query, updatedVisitor, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/visitor");
+    }
+  });
 };
 
 module.exports.getDelete = (req, res) => {
-  res.render("visitor/delete");
+  const queryDel = { _id: req.params.id };
+  Visitor.remove(queryDel, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/visitor");
+    }
+  });
+};
+
+module.exports.getSearch = (req, res) => {
+  const question = req.query.q;
+  Visitor.find()
+    .or([{ name: question }, { age: question }])
+    .then((matchedVisitor) => {
+      res.render("visitor/index", {
+        listVisitor: matchedVisitor,
+      });
+    })
+    .catch((err) => console.log(err));
 };

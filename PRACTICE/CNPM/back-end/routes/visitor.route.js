@@ -8,9 +8,13 @@ router.get('/create', visitorController.getCreate)
 
 router.post('/create', visitorController.postCreate)
 
-router.get('/update', visitorController.getUpdate)
+router.get('/update/:id', visitorController.getUpdate)
 
-router.get('/delete', visitorController.getDelete)
+router.post('/update/:id', visitorController.postUpdate)
+
+router.get('/delete/:id', visitorController.getDelete)
+
+router.get('/search', visitorController.getSearch)
 
 module.exports = router
 

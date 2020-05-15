@@ -1,0 +1,23 @@
+h1 DUTY
+p Welcome
+
+form(action="/duty/search", method="GET")
+  input(type="text", name="q")
+  button Search
+
+ul
+  each duty in listDuty
+    li= duty.name
+    li= duty.time
+    li= duty.phone
+    li= duty.place
+
+ul
+  each duty in listDuty
+    a(href="/duty/update/" + duty._id)
+      li Update
+    a(href="/duty/delete/" + duty._id)
+      li Delete
+
+a(href="/duty/create") Create duty
+a(href="/duty/search") Search duty

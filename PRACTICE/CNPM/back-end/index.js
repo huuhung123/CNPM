@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+const port = process.env.PORT || 8000
+
 const bcrypt = require('bcrypt')
 
 const mongoose = require('mongoose')
@@ -22,8 +24,9 @@ app.use(bodyParser.json())
 const visitorRoute = require('./routes/visitor.route')
 const studentRoute = require('./routes/student.route')
 const userRoute = require('./routes/user.router')
+const dutyRoute = require('./routes/duty.route')
+const serviceRoute = require('./routes/service.route')
 
-const port = process.env.PORT || 8000
 
 app.set('view engine', 'pug')
 app.set('views','./views')
@@ -38,6 +41,7 @@ app.get('/',(req, res) => {
 app.use('/visitor', visitorRoute)
 app.use('/student', studentRoute)
 app.use('/user', userRoute)
-
+app.use('/duty', dutyRoute)
+app.use('/service', serviceRoute)
 
 app.listen(port, () => console.log(`Server running at port ${port}`))
