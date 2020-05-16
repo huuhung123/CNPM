@@ -1,7 +1,7 @@
 extends ../layouts/common.pug
 
 block content
-    h1 Create duty
+    h1.text-center Create duty
 
     form(action="/duty/create", method="POST")
         .form-group 
@@ -10,7 +10,7 @@ block content
 
         .form-group 
             label Time:
-            input.form-control(type="text", name="age", value="")
+            input.form-control(type="text", name="time", value="")
     
         .form-group
             label Phone:

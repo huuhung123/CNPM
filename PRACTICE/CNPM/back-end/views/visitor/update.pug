@@ -1,12 +1,14 @@
 extends ../layouts/common.pug
 
 block content
-    h1 UPDATE VISITOR
+    h1.text-center UPDATE VISITOR
 
     form(action="/visitor/update/" + visitor._id, method="POST")
-        label Name:
-        input(type="text", name="name", value="")
-        label Age:
-        input(type="text", name="age", value="")
-        
-        button Create
+        .form-group 
+            label Name:
+            input.form-control(type="text", name="name", value="")
+
+        .form-group
+            label Age:
+            input.form-control(type="text", name="age", value="")
+        button.btn.btn-primary Update

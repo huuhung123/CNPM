@@ -2,13 +2,14 @@ extends ../layouts/common.pug
 
 block content
   h1 SERVICE
-  p Welcome
-
+  
   form(action="/service/search", method="GET")
-    input(type="text", name="q")
-    button Search
+    .form-group 
+      input.form-control(type="text", name="q")
+    .form-group 
+      button.btn.btn-primary Search
 
-  table.table
+  table.table.table-bordered
     thead.thead-dark
       tr
         th(scope='col') #ID
@@ -26,7 +27,8 @@ block content
           td= service.phone
           td= service.place
           td
-            a.btn.btn-danger(href="/service/update/" + service._id) Update
+            a.btn.btn-danger(href="/service/update/" + service._id) Update 
+            = " "
             a.btn.btn-warning(href="/service/delete/" + service._id) Delete
 
   a.btn.btn-primary(href="/service/create") Create service

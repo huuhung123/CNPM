@@ -1,16 +1,23 @@
 extends ../layouts/common.pug
 
 block content
-    h1 UPDATE SERVICE
-    p ID: #{service._id}
+    h1.text-center UPDATE SERVICE
+    p.text-center ID: #{service._id}
 
-    form(action="/service/update/" + service._id, method="POST")
-        label Name: 
-        input(type="text", name="name", value="")
-        label Service:
-        input(type="text", name="age", value="")
-        label Phone:
-        input(type="text", name="phone", value="")
-        label Place:
-        input(type="text", name="place", value="")
-        button Create 
+    form(action="/service/update" + service._id, method="POST")
+        .form-group 
+            label Name:
+            input.form-control(type="text", name="name", value="")
+
+        .form-group 
+            label Service:
+            input.form-control(type="text", name="service", value="")
+    
+        .form-group
+            label Phone:
+            input.form-control(type="text", name="phone", value="")
+
+        .form-group
+            label Place:
+            input.form-control(type="text", name="place", value="")
+        button.btn.btn-primary Update

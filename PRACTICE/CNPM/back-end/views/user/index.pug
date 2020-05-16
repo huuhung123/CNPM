@@ -1,9 +1,10 @@
 extends ../layouts/common.pug
 
 block content
-    h1 USER
+  h1 USER
 
-    table.table
+
+  table.table.table-bordered
     thead.thead-dark
       tr
         th(scope='col') #ID
@@ -16,5 +17,6 @@ block content
           td= user.user
           td= user.password
 
-    a.btn.btn-primary.btn-lg(href='/user/create') Create User
-    a.btn.btn-primary.btn-lg(href='/user/login') Login User
+  a.btn.btn-warning(href='/user/create') Create User 
+  = " "
+  a.btn.btn-danger(href='/user/login') Login User

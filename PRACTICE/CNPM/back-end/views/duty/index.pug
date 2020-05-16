@@ -5,24 +5,11 @@ block content
 
   form(action="/duty/search", method="GET")
     .form-group 
-      input.form-control(type="text", name="name", value="") 
+      input.form-control(type="text", name="q")
+    .form-group 
       button.btn.btn-primary Search
-  br
-  br
 
-  //- form(action="/duty/search", method="POST")
-  //-   .form-group 
-  //-     input.form-control(type="text", name="name", value="")
-  //-   button.btn.btn-primary Search
-
-  //- ul
-  //-   each duty in listDuty
-  //-     li= duty.name
-  //-     li= duty.time
-  //-     li= duty.phone
-  //-     li= duty.place
-
-  table.table
+  table.table.table-bordered
     thead.thead-dark
       tr
         th(scope='col') #ID
@@ -40,7 +27,8 @@ block content
           td= duty.phone
           td= duty.place
           td
-            a.btn.btn-danger(href="/duty/update/" + duty._id) Update
+            a.btn.btn-danger(href="/duty/update/" + duty._id) Update 
+            = " "
             a.btn.btn-warning(href="/duty/delete/" + duty._id) Delete
 
   a.btn.btn-primary(href="/duty/create") Create duty
