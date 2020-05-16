@@ -4,10 +4,15 @@ block content
     h1 Create user
 
     form(action="/user/create", method="POST")
-        label User:
-        input(type="text", name="user", value="")
-        label Password:
-        input(type="password", name="password", value="")
-        label Confirm:
-        input(type="password", name="confirm", value="")
-        button Create
+        .form-group 
+            label User:
+            input.form-control(type="text", name="user", value="")
+
+        .form-group 
+            label Password:
+            input.form-control(type="password", name="password", value="")
+    
+        .form-group
+            label Confirm:
+            input.form-control(type="password", name="confirm", value="")
+        button.btn.btn-primary Create

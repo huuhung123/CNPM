@@ -4,9 +4,11 @@ block content
     h1 Login user
 
     form(action="/user/login", method="POST")
+    .form-group 
         label User:
-        input(type="text", name="user", value="")
+        input.form-control(type="text", name="user", value="")
+
+    .form-group 
         label Password:
-        input(type="password", name="password", value="")
-    
-        button Login
+        input.form-control(type="password", name="password", value="")
+    button.btn.btn-primary Login

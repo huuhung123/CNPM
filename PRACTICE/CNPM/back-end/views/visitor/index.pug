@@ -8,18 +8,22 @@ block content
     input(type="text", name="q")
     button Search
 
-  ul
+  table.table
+    thead.thead-dark
+      tr
+        th(scope='col') #ID
+        th(scope='col') Name
+        th(scope='col') Age
+        th(scope='col') Operation
     each visitor in listVisitor
-      li= visitor._id
-      li= visitor.name
-      li= visitor.age
+      tbody
+        tr
+          th(scope='row')= visitor._id
+          td= visitor.name
+          td= visitor.age
+          td
+            a.btn.btn-danger(href="/visitor/update/" + visitor._id) Update
+            a.btn.btn-warning(href="/visitor/delete/" + visitor._id) Delete
 
-  ul
-    each visitor in listVisitor
-      a(href="/visitor/update/" + visitor._id)
-        li Update
-      a(href="/visitor/delete/" + visitor._id)
-        li Delete
-
-  a(href="/visitor/create") Create visitor
+  a.btn.btn-primary(href="/visitor/create") Create visitor
 

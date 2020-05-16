@@ -3,7 +3,16 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 
 module.exports.getIndex = (req, res) => {
-  res.render("user/index");
+  User.find({}, (err, users) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("user/index", {
+        listUser: users
+      });
+    }
+  });
+  //res.render("user/index");
 };
 
 module.exports.getCreate = (req, res) => {
@@ -33,7 +42,7 @@ module.exports.postCreate = (req, res) => {
 
 module.exports.getLogin = (req, res) => {
   res.render("user/login");
-};
+}
 
 module.exports.postLogin = (req, res) => {
   User.find({ user: req.body.user }, (err, user) => {

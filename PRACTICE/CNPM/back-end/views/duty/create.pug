@@ -4,12 +4,25 @@ block content
     h1 Create duty
 
     form(action="/duty/create", method="POST")
-        label Name:
-        input(type="text", name="name", value="")
-        label Time:
-        input(type="text", name="age", value="")
-        label Phone:
-        input(type="text", name="phone", value="")
-        label Place:
-        input(type="text", name="place", value="")
-        button Create
+        .form-group 
+            label Name:
+            input.form-control(type="text", name="name", value="")
+
+        .form-group 
+            label Time:
+            input.form-control(type="text", name="age", value="")
+    
+        .form-group
+            label Phone:
+            input.form-control(type="text", name="phone", value="")
+
+        .form-group
+            label Place:
+            input.form-control(type="text", name="place", value="")
+        button.btn.btn-primary Create
+
+
+     
+
+
+

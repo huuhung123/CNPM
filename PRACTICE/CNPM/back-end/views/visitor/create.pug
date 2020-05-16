@@ -4,9 +4,11 @@ block content
     h1 Create visitor
 
     form(action="/visitor/create", method="POST")
-        label Name:
-        input(type="text", name="name", value="")
-        label Age:
-        input(type="text", name="age", value="")
-    
-        button Create
+        .form-group 
+            label Name:
+            input.form-control(type="text", name="name", value="")
+
+        .form-group
+            label Age:
+            input.form-control(type="text", name="age", value="")
+        button.btn.btn-primary Create

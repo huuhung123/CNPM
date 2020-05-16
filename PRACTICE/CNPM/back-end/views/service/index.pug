@@ -8,23 +8,28 @@ block content
     input(type="text", name="q")
     button Search
 
-  ul
+  table.table
+    thead.thead-dark
+      tr
+        th(scope='col') #ID
+        th(scope='col') Name
+        th(scope='col') Service
+        th(scope='col') Phone
+        th(scope='col') Place
+        th(scope='col') Operation
     each service in listService
-      li= service.name
-      li= service.service
-      li= service.phone
-      li= service.place
+      tbody
+        tr
+          th(scope='row')= service._id
+          td= service.name
+          td= service.time
+          td= service.phone
+          td= service.place
+          td
+            a.btn.btn-danger(href="/service/update/" + service._id) Update
+            a.btn.btn-warning(href="/service/delete/" + service._id) Delete
 
-  ul
-    each service in listService
-      a(href="/service/update/" + service._id)
-        li Update
-      a(href="/service/delete/" + service._id)
-        li Delete
-
-  a(href="/service/create") Create service
-
-
+  a.btn.btn-primary(href="/service/create") Create service
 
 
 
