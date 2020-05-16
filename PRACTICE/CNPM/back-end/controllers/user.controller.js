@@ -8,7 +8,7 @@ module.exports.getIndex = (req, res) => {
       console.log(err);
     } else {
       res.render("user/index", {
-        listUser: users
+        listUser: users,
       });
     }
   });
@@ -19,44 +19,98 @@ module.exports.getCreate = (req, res) => {
   res.render("user/create");
 };
 
-module.exports.postCreate = (req, res) => {
-  const saltRounds = 15;
-  const newUser = new User();
-
-  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+module.exports.getDelete = (req, res) => {
+  const queryDel = { _id: req.params.id };
+  User.remove(queryDel, (err) => {
     if (err) {
       console.log(err);
     } else {
-      newUser.user = req.body.user;
-      newUser.password = hash;
-      newUser.save((err) => {
-        if (err) {
-          console.log(err);
-        } else {
-          res.redirect("/user");
-        }
-      });
+      res.redirect("/user");
     }
   });
 };
 
+module.exports.postCreate = (req, res) => {
+  const saltRounds = 15;
+  const newUser = new User();
+
+  User.find({ user: req.body.user }, (err, users) => {
+    if (err) {
+      console.log(err);
+    } else {
+      if (users.length > 0) {
+        res.render("user/create", {
+          errorUser: true,
+        });
+      } else {
+        if (req.body.password !== req.body.confirm) {
+          res.render("user/create", {
+            errPassword: true,
+          });
+        } else {
+          bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
+            if (err) {
+              console.log(err);
+            } else {
+              newUser.user = req.body.user;
+              newUser.password = hash;
+              newUser.save((err) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  res.redirect("/user");
+                }
+              });
+            }
+          });
+        }
+      }
+    }
+  });
+
+  // User.find({}, (err, users) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     res.render("user/index", {
+  //       listUser: users
+  //     });
+  //   }
+  // });
+};
+
 module.exports.getLogin = (req, res) => {
   res.render("user/login");
-}
+};
 
 module.exports.postLogin = (req, res) => {
-  User.find({ user: req.body.user }, (err, user) => {
+  console.log(req.body);
+  User.find({ user: req.body.user }, (err, users) => {
     if (err) {
-      res.sendStatus(400);
+      console.log(err);
     } else {
-      const hashPassword = user[0].password;
-      bcrypt.compare(res.body.password, hashPassword, (err, result) => {
-        if (result == true) {
-          console.log("Login successfully");
-        } else {
-          console.log("Login failed");
-        }
-      });
+      if (users.length == 0) {
+        res.render("user/login", {
+          errUser: true,
+        });
+      } else {
+        const hashPassword = users[0].password;
+        bcrypt.compare(req.body.password, hashPassword, (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            if (result == true) {
+              res.render("index", {
+                errPassword: false,
+              });
+            } else {
+              res.render("user/login", {
+                errPassword: true,
+              });
+            }
+          }
+        });
+      }
     }
   });
 };

@@ -2,7 +2,10 @@ extends ../layouts/common.pug
 
 block content
     h1 Create user
-
+    if errorUser
+        .alert.alert-danger(role='alert') User exist
+    if errPassword
+        .alert.alert-danger(role='alert') Error password
     form(action="/user/create", method="POST")
         .form-group 
             label User:

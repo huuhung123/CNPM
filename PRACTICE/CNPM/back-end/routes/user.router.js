@@ -13,6 +13,8 @@ router.get('/login', userController.getLogin)
 
 router.post('/login', userController.postLogin)
 
+router.get('/delete/:id', userController.getDelete)
+
 module.exports = router
 
 
