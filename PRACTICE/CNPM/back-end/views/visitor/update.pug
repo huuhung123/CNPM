@@ -5,10 +5,10 @@ block content
 
     form(action="/visitor/update/" + visitor._id, method="POST")
         .form-group 
-            label Name:
-            input.form-control(type="text", name="name", value="")
+            label.font-weight-bold Name:
+            input.form-control(type="text", name="name", value=visitor.name)
 
         .form-group
-            label Age:
-            input.form-control(type="text", name="age", value="")
+            label.font-weight-bold Age:
+            input.form-control(type="text", name="age", value=visitor.age)
         button.btn.btn-primary Update

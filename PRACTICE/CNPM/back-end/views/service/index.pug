@@ -1,7 +1,7 @@
 extends ../layouts/common.pug
 
 block content
-  h1 SERVICE
+  h1.text-center SERVICE
   
   form(action="/service/search", method="GET")
     .form-group 
@@ -23,7 +23,7 @@ block content
         tr
           th(scope='row')= service._id
           td= service.name
-          td= service.time
+          td= service.service
           td= service.phone
           td= service.place
           td

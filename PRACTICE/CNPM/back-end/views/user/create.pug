@@ -8,14 +8,14 @@ block content
         .alert.alert-danger(role='alert') Error password
     form(action="/user/create", method="POST")
         .form-group 
-            label User:
+            label.font-weight-bold  User:
             input.form-control(type="text", name="user", value="")
 
         .form-group 
-            label Password:
+            label.font-weight-bold  Password:
             input.form-control(type="password", name="password", value="")
     
         .form-group
-            label Confirm:
+            label.font-weight-bold  Confirm Password:
             input.form-control(type="password", name="confirm", value="")
         button.btn.btn-primary Create

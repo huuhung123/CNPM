@@ -5,18 +5,18 @@ block content
 
     form(action="/service/create", method="POST")
         .form-group 
-            label Name:
+            label.font-weight-bold Name:
             input.form-control(type="text", name="name", value="")
 
         .form-group 
-            label Service:
+            label.font-weight-bold Service:
             input.form-control(type="text", name="service", value="")
     
         .form-group
-            label Phone:
+            label.font-weight-bold Phone:
             input.form-control(type="text", name="phone", value="")
 
         .form-group
-            label Place:
+            label.font-weight-bold Place:
             input.form-control(type="text", name="place", value="")
         button.btn.btn-primary Create

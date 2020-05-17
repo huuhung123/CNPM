@@ -5,9 +5,23 @@ const port = process.env.PORT || 8000
 
 const bcrypt = require('bcrypt')
 
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/CNPM', {useNewUrlParser: true, useUnifiedTopology: true})
+const cors = require('cors')
+app.use(cors())
 
+const rateLimit = require('express-rate-limit')
+const limiter = rateLimit({
+    windowMs: 60*15*1000, // 15 minutes
+    max: 100, // limit each IP to 100 requests per windowMs
+    message: "THE PAGE IS BLOCKING. PLEASE WAITING..."
+})
+
+app.use(limiter)
+
+const mongoose = require('mongoose')
+
+require('dotenv').config()
+const URL = process.env.URL_DB
+mongoose.connect(URL, {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
 db.once('open', () => {

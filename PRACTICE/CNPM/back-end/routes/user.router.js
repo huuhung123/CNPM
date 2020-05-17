@@ -15,6 +15,10 @@ router.post('/login', userController.postLogin)
 
 router.get('/delete/:id', userController.getDelete)
 
+router.get('/update/:id', userController.getUpdate)
+
+router.post('/update/:id', userController.postUpdate)
+
 module.exports = router
 
 

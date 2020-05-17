@@ -1,76 +1,41 @@
 const mongoose = require("mongoose");
 const Visitor = require("../models/visitor.model");
 
-// module.exports.getIndex = (req, res) => {
-
-//   res.render("visitor/index", {
-//     listVisitor: listVisitor });
-// };
-
 module.exports.getIndex = (req, res) => {
-  Visitor.find({}, (err, visitors) => {
-    if (err) {
-      console.log(err);
-    } else {
+  Visitor
+    .find({})
+    .then(visitors => {
       res.render("visitor/index", {
-        listVisitor: visitors,
-      });
-    }
-  });
+        listVisitor: visitors
+      })
+    })
+    .catch(err => console.log(err))
 };
-
-// app.post('/articles/add', (req, res) => {
-//   let article = new Article();
-//   article.title = req.body.title;
-//   article.author = req.body.author;
-//   article.body = req.body.body;
-//   article.save((err) => {
-//       if(err) {
-//           console.log(err);
-//       } else {
-//           res.redirect('/')
-//       }
-//   })
-
-// })
 
 module.exports.getCreate = (req, res) => {
   res.render("visitor/create");
 };
 
 module.exports.postCreate = (req, res) => {
-  // const newVisitor = {
-  //   _objectID: Number(req.body._objectID),
-  //   name: req.body.name,
-  //   age: Number(req.body.age),
-  // };
-  // var newlistVisitor = [...listVisitor, newVisitor];
-  // res.render("visitor/index", {
-  // listVisitor: newlistVisitor,
-  // });
-
   const newVisitor = new Visitor();
   newVisitor.name = req.body.name;
   newVisitor.age = Number(req.body.age);
-  newVisitor.save((err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/visitor");
-    }
-  });
+ 
+  newVisitor
+    .save()
+    .then(() => res.redirect("/visitor"))
+    .catch(err => console.log(err))
 };
 
 module.exports.getUpdate = (req, res) => {
-  Visitor.findById(req.params.id, (err, visitor) => {
-    if (err) {
-      console.log(err);
-    } else {
+  Visitor
+    .findById(req.params.id)
+    .then(visitor => {
       res.render("visitor/update", {
-        visitor: visitor,
-      });
-    }
-  });
+        visitor: visitor
+      })
+    })
+    .catch(err => console.log(err))
 };
 
 module.exports.postUpdate = (req, res) => {
@@ -80,30 +45,29 @@ module.exports.postUpdate = (req, res) => {
 
   const query = { _id: req.params.id };
 
-  Visitor.update(query, updatedVisitor, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/visitor");
-    }
-  });
+  Visitor
+    .update(query, updatedVisitor)
+    .then(() => res.redirect("/visitor"))
+    .catch(err => console.log(err))
 };
 
 module.exports.getDelete = (req, res) => {
   const queryDel = { _id: req.params.id };
-  Visitor.remove(queryDel, (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/visitor");
-    }
-  });
+
+  Visitor
+    .remove(queryDel)
+    .then(() => res.redirect("/visitor"))
+    .catch(err => console.log(err))
 };
 
 module.exports.getSearch = (req, res) => {
   const question = req.query.q;
-  Visitor.find()
-    .or([{ name: question }, { age: question }])
+  Visitor
+    .find()
+    .or([
+      { name: question }, 
+      { age: question }
+      ])
     .then((matchedVisitor) => {
       res.render("visitor/index", {
         listVisitor: matchedVisitor,

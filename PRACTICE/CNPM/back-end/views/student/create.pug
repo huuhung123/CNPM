@@ -11,7 +11,7 @@
 extends ../layouts/common.pug
 
 block content
-    h1.text-center Create user
+    h1.text-center CREATE STUDENT
 
     //- if errors
     //-    each error in errors
@@ -19,11 +19,11 @@ block content
     //-value=values ? values.name: '')
     form(action="/student/create", method="POST")
        .form-group 
-            label Name:
+            label.font-weight-bold Name:
             input.form-control(type="text", name="name")
 
        .form-group 
-            label Age:
+            label.font-weight-bold Age:
             input.form-control(type="text", name="age")
 
        button.btn.btn-primary Create

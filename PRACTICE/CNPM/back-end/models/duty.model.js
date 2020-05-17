@@ -3,19 +3,19 @@ const mongoose = require('mongoose')
 const dutySchema = mongoose.Schema({
     name: {
         type: String,
-        requied: true
+        required: true
     },
     time: {
         type: String,
-        requied: true
+        required: true
     },
     phone: {
         type: String,
-        requied: true
+        required: true
     },
     place: {
         type: String,
-        requied: true
+        required: true
     }
 });
 

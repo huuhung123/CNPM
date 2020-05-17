@@ -3,12 +3,12 @@ extends ../layouts/common.pug
 block content
     h1.text-center UPDATE STUDENT
 
-    form(action="/student/update" + student._id, method="POST")
+    form(action="/student/update/" + student._id, method="POST")
         .form-group 
-            label Name:
-            input.form-control(type="text", name="name", value="")
+            label.font-weight-bold Name:
+            input.form-control(type="text", name="name", value=student.name)
 
         .form-group 
-            label Age:
-            input.form-control(type="text", name="age", value="")
+            label.font-weight-bold Age:
+            input.form-control(type="text", name="age", value=student.age)
         button.btn.btn-primary Update

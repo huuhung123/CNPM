@@ -1,23 +1,23 @@
 extends ../layouts/common.pug
 
 block content
-    h1.text-center Create duty
+    h1.text-center CREATE DUTY
 
     form(action="/duty/create", method="POST")
         .form-group 
-            label Name:
+            label.font-weight-bold Name:
             input.form-control(type="text", name="name", value="")
 
         .form-group 
-            label Time:
+            label.font-weight-bold Time:
             input.form-control(type="text", name="time", value="")
     
         .form-group
-            label Phone:
+            label.font-weight-bold Phone:
             input.form-control(type="text", name="phone", value="")
 
         .form-group
-            label Place:
+            label.font-weight-bold Place:
             input.form-control(type="text", name="place", value="")
         button.btn.btn-primary Create
 

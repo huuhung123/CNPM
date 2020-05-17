@@ -1,7 +1,7 @@
 extends ../layouts/common.pug
 
 block content
-  h1 USER
+  h1.text-center USER
 
 
   table.table.table-bordered
@@ -19,6 +19,9 @@ block content
           td= user.password
           td
             a.btn.btn-danger(href="/user/delete/" + user._id) Delete
+            //- = " "
+            //- = " "
+            //- a.btn.btn-danger(href="/user/update/" + user._id) Update 
 
   a.btn.btn-warning(href='/user/create') Create User 
   = " "
