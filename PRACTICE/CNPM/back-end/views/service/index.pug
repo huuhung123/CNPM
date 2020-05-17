@@ -17,6 +17,7 @@ block content
         th(scope='col') Service
         th(scope='col') Phone
         th(scope='col') Place
+        th(scope='col') CreatedTime
         th(scope='col') Operation
     each service in listService
       tbody
@@ -26,6 +27,7 @@ block content
           td= service.service
           td= service.phone
           td= service.place
+          td= service.createdTime
           td
             a.btn.btn-danger(href="/service/update/" + service._id) Update 
             = " "

@@ -10,6 +10,7 @@ block content
         th(scope='col') #ID
         th(scope='col') User
         th(scope='col') Password
+        th(scope='col') CreatedTime
         th(scope='col') Operation
     each user in listUser
       tbody
@@ -17,6 +18,7 @@ block content
           th(scope='row')= user._id
           td= user.user
           td= user.password
+          td= user.createdTime
           td
             a.btn.btn-danger(href="/user/delete/" + user._id) Delete
             //- = " "

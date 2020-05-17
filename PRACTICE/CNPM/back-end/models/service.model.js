@@ -16,6 +16,10 @@ const serviceSchema = mongoose.Schema({
     place: {
         type: String,
         requied: true
+    },
+    createdTime: {
+        type: String,
+        required: true
     }
 });
 

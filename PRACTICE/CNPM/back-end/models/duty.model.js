@@ -16,6 +16,10 @@ const dutySchema = mongoose.Schema({
     place: {
         type: String,
         required: true
+    },
+    createdTime: {
+        type: String,
+        required: true
     }
 });
 

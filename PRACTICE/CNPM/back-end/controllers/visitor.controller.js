@@ -17,9 +17,13 @@ module.exports.getCreate = (req, res) => {
 };
 
 module.exports.postCreate = (req, res) => {
+  const today = new Date()
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const newVisitor = new Visitor();
   newVisitor.name = req.body.name;
   newVisitor.age = Number(req.body.age);
+  newVisitor.createdTime = date+' '+time
  
   newVisitor
     .save()

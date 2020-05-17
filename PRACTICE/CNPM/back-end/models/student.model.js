@@ -8,6 +8,10 @@ const studentSchema = mongoose.Schema({
     age: {
         type: Number,
         requied: true
+    },
+    createdTime: {
+        type: String,
+        required: true
     }
 });
 

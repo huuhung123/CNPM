@@ -45,6 +45,10 @@ module.exports.getDelete = (req, res) => {
 
 module.exports.postCreate = (req, res) => {
   const saltRounds = 15;
+  const today = new Date()
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
   const newUser = new User();
 
   // User.find({ user: req.body.user }, (err, users) => {
@@ -107,6 +111,7 @@ module.exports.postCreate = (req, res) => {
             .then((hash) => {
               newUser.user = req.body.user;
               newUser.password = hash;
+              newUser.createdTime = date+' '+time
               newUser
                 .save()
                 .then(() => res.redirect("/user"))

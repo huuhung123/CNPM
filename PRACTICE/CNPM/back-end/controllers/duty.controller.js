@@ -28,12 +28,15 @@ module.exports.getCreate = (req, res) => {
 };
 
 module.exports.postCreate = (req, res) => {
+  const today = new Date()
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const newDuty = new Duty();
   newDuty.name = req.body.name;
   newDuty.time = req.body.time;
   newDuty.place = req.body.place;
   newDuty.phone = req.body.phone;
-
+  newDuty.createdTime = date+' '+time
   // newDuty.save((err) => {
   //   if (err) {
   //     console.log(err);

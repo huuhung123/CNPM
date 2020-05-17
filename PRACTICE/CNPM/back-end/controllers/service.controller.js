@@ -17,11 +17,15 @@ module.exports.getCreate = (req, res) => {
 };
 
 module.exports.postCreate = (req, res) => {
+  const today = new Date()
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const newService = new Service();
   newService.name = req.body.name;
   newService.service = req.body.service;
   newService.phone = req.body.phone;
   newService.place = req.body.place;
+  newService.createdTime = date+' '+time
 
   newService
     .save()

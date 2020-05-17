@@ -15,6 +15,7 @@ block content
         th(scope='col') #ID
         th(scope='col') Name
         th(scope='col') Age
+        th(scope='col') CreatedTime
         th(scope='col') Operation
     each student in listStudent
       tbody
@@ -22,6 +23,7 @@ block content
           th(scope='row')= student._id
           td= student.name
           td= student.age
+          td= student.createdTime
           td
             a.btn.btn-danger(href="/student/update/" + student._id) Update
             = " "

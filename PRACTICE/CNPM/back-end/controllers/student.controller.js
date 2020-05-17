@@ -17,9 +17,14 @@ module.exports.getCreate = (req, res) => {
 };
 
 module.exports.postCreate = (req, res) => {
+  const today = new Date()
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const newStudent = new Student()
+
   newStudent.name = req.body.name
   newStudent.age = Number(req.body.age)
+  newStudent.createdTime = date+' '+time
  
   newStudent
     .save()
