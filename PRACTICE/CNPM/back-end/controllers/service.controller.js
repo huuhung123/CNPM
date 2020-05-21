@@ -4,17 +4,18 @@ const Service = require("../models/service.model");
 module.exports.getIndex = (req, res) => {
   Service
     .find({})
-    .then((services) => {
-      res.render("service/index", {
-        listService: services,
-      });
-    })
+    // .then((services) => {
+    //   res.render("service/index", {
+    //     listService: services,
+    //   });
+    // })
+    .then(services => res.json(services))
     .catch((err) => console.log(err));
 };
 
 module.exports.getCreate = (req, res) => {
   res.render("service/create");
-};
+}
 
 module.exports.postCreate = (req, res) => {
   const today = new Date()
@@ -33,18 +34,15 @@ module.exports.postCreate = (req, res) => {
     .catch((err) => console.log(err));
 };
 
-module.exports.getDelete = (req, res) => {
-  res.render("service/delete");
-};
-
 module.exports.getUpdate = (req, res) => {
   Service
     .findById(req.params.id)
-    .then((service) => {
-      res.render("service/update", {
-        service: service,
-      });
-    })
+    // .then((service) => {
+    //   res.render("service/update", {
+    //     service: service,
+    //   });
+    // })
+    .then(() => res.json("Service was found"))
     .catch((err) => console.log(err));
 };
 
@@ -59,7 +57,8 @@ module.exports.postUpdate = (req, res) => {
 
   Service
     .update(query, updatedService)
-    .then(() => res.redirect("/service"))
+    // .then(() => res.redirect("/service"))
+    .then(() => res.json("123"))
     .catch((err) => console.log(err));
 };
 
@@ -68,7 +67,8 @@ module.exports.getDelete = (req, res) => {
 
   Service
     .remove(queryDel)
-    .then(() => res.redirect("/service"))
+    // .then(() => res.redirect("/service"))
+    .then(() => res.json("Duty is deleted"))
     .catch(err => console.log(err))
 };
 

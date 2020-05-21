@@ -4,17 +4,18 @@ const Student = require('../models/student.model')
 module.exports.getIndex = (req, res) => {
   Student
     .find({})
-    .then(students => {
-      res.render("student/index", {
-        listStudent: students
-      })
-    })
+    // .then(students => {
+    //   res.render("student/index", {
+    //     listStudent: students
+    //   })
+    // })
+    .then(students => res.json(students))
     .catch(err => console.log(err))
 };
 
 module.exports.getCreate = (req, res) => {
   res.render("student/create");
-};
+}
 
 module.exports.postCreate = (req, res) => {
   const today = new Date()
@@ -23,12 +24,13 @@ module.exports.postCreate = (req, res) => {
   const newStudent = new Student()
 
   newStudent.name = req.body.name
-  newStudent.age = Number(req.body.age)
+  newStudent.age = req.body.age
   newStudent.createdTime = date+' '+time
  
   newStudent
     .save()
-    .then(() => res.redirect('/student'))
+    // .then(() => res.redirect('/student'))
+    .then(() => res.json("Duty is created"))
     .catch(err => console.log(err))
 };
 
@@ -36,9 +38,10 @@ module.exports.getUpdate = (req, res) => {
   Student
     .findById(req.params.id)
     .then(student => {
-      res.render("student/update", {
-        student: student
-      })
+      res.json("Duty was found")
+      // res.render("student/update", {
+      //   student: student
+      // })
     })
     .catch(err => console.log(err))
 };
@@ -52,7 +55,8 @@ module.exports.postUpdate = (req, res) => {
 
   Student
     .update(query, updatedStudent)
-    .then(() => res.redirect("/student"))
+    // .then(() => res.redirect("/student"))
+    .then(() => res.json("123"))
     .catch(err => console.log(err))
 }
 
@@ -61,7 +65,8 @@ module.exports.getDelete = (req, res) => {
   
   Student
     .remove(queryDel)
-    .then(() => res.redirect('/student'))
+    //.then(() => res.redirect('/student'))
+    .then(() => res.json("Student is deleted"))
     .catch(err => console.log(err))
 }
 

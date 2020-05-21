@@ -18,6 +18,7 @@ block content
         th(scope='col') Phone
         th(scope='col') Place
         th(scope='col') CreatedTime
+        th(scope='col') UpdatedTime
         th(scope='col') Operation
     each duty in listDuty
       tbody
@@ -28,6 +29,7 @@ block content
           td= duty.phone
           td= duty.place
           td= duty.createdTime
+          td= duty.updatedTime
           td
             a.btn.btn-danger(href="/duty/update/" + duty._id) Update 
             = " "

@@ -4,11 +4,12 @@ const Visitor = require("../models/visitor.model");
 module.exports.getIndex = (req, res) => {
   Visitor
     .find({})
-    .then(visitors => {
-      res.render("visitor/index", {
-        listVisitor: visitors
-      })
-    })
+    // .then(visitors => {
+    //   res.render("visitor/index", {
+    //     listVisitor: visitors
+    //   })
+    // })
+    .then(visitors => res.json(visitors))
     .catch(err => console.log(err))
 };
 
@@ -27,7 +28,8 @@ module.exports.postCreate = (req, res) => {
  
   newVisitor
     .save()
-    .then(() => res.redirect("/visitor"))
+    // .then(() => res.redirect("/visitor"))
+    .then(() => res.json("Duty is created"))
     .catch(err => console.log(err))
 };
 
@@ -35,9 +37,10 @@ module.exports.getUpdate = (req, res) => {
   Visitor
     .findById(req.params.id)
     .then(visitor => {
-      res.render("visitor/update", {
-        visitor: visitor
-      })
+      res.json("Duty was found")
+      // res.render("visitor/update", {
+      //   visitor: visitor
+      // })
     })
     .catch(err => console.log(err))
 };
@@ -51,7 +54,8 @@ module.exports.postUpdate = (req, res) => {
 
   Visitor
     .update(query, updatedVisitor)
-    .then(() => res.redirect("/visitor"))
+    //.then(() => res.redirect("/visitor"))
+    .then(() => res.json("123"))
     .catch(err => console.log(err))
 };
 
@@ -60,7 +64,8 @@ module.exports.getDelete = (req, res) => {
 
   Visitor
     .remove(queryDel)
-    .then(() => res.redirect("/visitor"))
+    // .then(() => res.redirect("/visitor"))
+    .then(() => res.json("Visitor is deleted"))
     .catch(err => console.log(err))
 };
 

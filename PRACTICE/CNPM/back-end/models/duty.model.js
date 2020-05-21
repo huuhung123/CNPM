@@ -18,8 +18,10 @@ const dutySchema = mongoose.Schema({
         required: true
     },
     createdTime: {
-        type: String,
-        required: true
+        type: String
+    },
+    updatedTime: {
+        type: String
     }
 });
 

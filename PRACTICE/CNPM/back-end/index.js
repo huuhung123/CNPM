@@ -1,21 +1,21 @@
 const express = require('express')
 const app = express()
 
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 5000
 
 const bcrypt = require('bcrypt')
 
 const cors = require('cors')
 app.use(cors())
 
-const rateLimit = require('express-rate-limit')
-const limiter = rateLimit({
-    windowMs: 60*15*1000, // 15 minutes
-    max: 100, // limit each IP to 100 requests per windowMs
-    message: "THE PAGE IS BLOCKING. PLEASE WAITING..."
-})
+// const rateLimit = require('express-rate-limit')
+// const limiter = rateLimit({
+//     windowMs: 60*15*1000, // 15 minutes
+//     max: 100, // limit each IP to 100 requests per windowMs
+//     message: "THE PAGE IS BLOCKING. PLEASE WAITING..."
+// })
 
-app.use(limiter)
+// app.use(limiter)
 
 const mongoose = require('mongoose')
 

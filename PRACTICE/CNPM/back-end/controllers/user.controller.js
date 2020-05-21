@@ -16,11 +16,12 @@ module.exports.getIndex = (req, res) => {
   //   }
   // });
   User.find({})
-    .then((users) => {
-      res.render("user/index", {
-        listUser: users,
-      });
-    })
+    // .then((users) => {
+    //   res.render("user/index", {
+    //     listUser: users,
+    //   });
+    // })
+    .then(users => res.json(users))
     .catch((err) => console.log(err));
 };
 

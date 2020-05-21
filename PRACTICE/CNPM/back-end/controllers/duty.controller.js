@@ -4,11 +4,12 @@ const Duty = require("../models/duty.model");
 module.exports.getIndex = (req, res) => {
   Duty
     .find({})
-    .then((duties) => {
-      res.render("duty/index", {
-        listDuty: duties,
-      });
-    })
+    // .then((duties) => {
+    //   res.render("duty/index", {
+    //     listDuty: duties,
+    //   });
+    // })
+    .then(duties => res.json(duties))
     .catch((err) => console.log(err));
 
   //   Duty.find({}, (err, duties) => {
@@ -37,31 +38,34 @@ module.exports.postCreate = (req, res) => {
   newDuty.place = req.body.place;
   newDuty.phone = req.body.phone;
   newDuty.createdTime = date+' '+time
-  // newDuty.save((err) => {
+  // newDuty.save((err) =>   {
   //   if (err) {
   //     console.log(err);
   //   } else {
   //     res.redirect("/duty");
   //   }
   // });
+
   newDuty
     .save()
-    .then(() => res.redirect("/duty"))
+    //.then(() => res.redirect("/duty"))
+    .then(() => res.json("Duty is created"))
     .catch(err => console.log(err))
 };
 
 module.exports.getDelete = (req, res) => {
-  const queryDel = { _id: req.params.id };
+  const queryDel = { _id: req.params._id };
   // Duty.remove(queryDel, (err) => {
   //   if (err) {
   //     console.log(err);
   //   } else {
   //     res.redirect("/duty");
   //   }
-  // });
+  // })
   Duty
     .remove(queryDel)
-    .then(() => res.redirect("/duty"))
+    //.then(() => res.redirect("/duty"))
+    .then(() => res.json("Duty is deleted"))
     .catch(err => console.log(err))
 };
 
@@ -76,11 +80,12 @@ module.exports.getSearch = (req, res) => {
       { phone: question },
       { place: question },
     ])
-    .then((matchedDuty) => {
-      res.render("duty/index", {
-        listDuty: matchedDuty,
-      });
-    })
+    // .then((matchedDuty) => {
+    //   res.render("duty/index", {
+    //     listDuty: matchedDuty,
+    //   });
+    // })
+    .then(matchedDuty => res.json(matchedDuty))
     .catch((err) => console.log(err));
   //   var matchedDuty =  db.get('users').filter(function(user) {
   //       return user.name.toLowerCase().indexOf(q.toLowerCase()) !== -1
@@ -93,28 +98,32 @@ module.exports.getUpdate = (req, res) => {
   //     console.log(err);
   //   } else {
   //     res.render("duty/update", {
-  //       duty: duty,
+  //       duty: duty, 
   //     });
   //   }
   // });
   Duty
-    .findById(req.params.id)
-    .then((duty) => {
-      res.render("duty/update", {
-        duty: duty
-      })
+    .findById(req.params._id)
+    .then(() => {
+      res.json("Duty was found")
+      // res.render("duty/update", {
+      //   duty: duty
+      // })
     })
     .catch(err => console.log(err))
 };
 
 module.exports.postUpdate = (req, res) => {
+  const today = new Date()
+  const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   const updatedDuty = {};
   updatedDuty.name = req.body.name;
   updatedDuty.time = req.body.time;
   updatedDuty.phone = req.body.phone;
   updatedDuty.place = req.body.place;
-
-  const query = { _id: req.params.id };
+  updatedDuty.updatedTime = date+' '+time
+  const query = { _id: req.params._id };
 
   // Duty.update(query, updatedDuty, (err) => {
   //   if (err) {
@@ -122,10 +131,11 @@ module.exports.postUpdate = (req, res) => {
   //   } else {
   //     res.redirect("/duty");
   //   }
-  // });
+  // })
 
   Duty
     .update(query, updatedDuty)
-    .then(() => res.redirect("/duty"))
-    .catch((err) => console.log(err))
+    .then(() => res.json("123"))
+    .catch(err => console.log(err))
 };
+

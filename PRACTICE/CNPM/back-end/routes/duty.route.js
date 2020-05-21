@@ -9,13 +9,13 @@ router.get('/create', dutyController.getCreate)
 
 router.post('/create', dutyController.postCreate)
 
-router.get('/delete/:id', dutyController.getDelete)
+router.get('/delete/:_id', dutyController.getDelete)
 
 router.get('/search', dutyController.getSearch)
 
-router.get('/update/:id', dutyController.getUpdate)
+router.get('/update/:_id', dutyController.getUpdate)
 
-router.post('/update/:id', dutyController.postUpdate)
+router.post('/update/:_id', dutyController.postUpdate)
 
 module.exports = router
 
