@@ -1,7 +1,31 @@
 import React, { Component } from "react";
-import StudentItem from "./studentItem.component";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
+const StudentItem = (props) => (
+  <tr>
+  <th scope="row">{props.content._id}</th>
+  <td>{props.content.name}</td>
+  <td>{props.content.age}</td>
+  <td>{props.content.createdTime}</td>
+  <td>
+    <Link
+      to={`/student/update/${props.content._id}`}
+      className="btn btn-warning"
+    >
+      {" "}
+      Update{" "}
+    </Link>
+    <Link
+      to={`/student/delete/${props.content._id}`}
+      className="btn btn-danger" 
+    >
+      {" "}
+      Delete{" "}
+    </Link>
+  </td>
+</tr>
+)
 
 export default class indexStudent extends Component {
   constructor(props) {
@@ -16,14 +40,30 @@ export default class indexStudent extends Component {
     axios.get("http://localhost:5000/student").then((res) => {
       if (res.data.length > 0) {
         this.setState({
-          ...this.state.students.push(...res.data),
+          students: res.data
         });
       }
-    });
-    // console.log(this.state)
+    })
+    .catch(err => console.log(err))
   }
 
-  
+  deleteStudent(id) {
+    axios.delete('http://localhost:5000/student/'+ id)
+    .then(res => console.log(res.data));
+
+    this.setState({
+        students: this.state.students.filter(el => el._id !== id)
+    })
+}
+
+  studentList() {
+    return this.state.students.map(currentStudent => {
+      return <StudentItem content={currentStudent}
+      deleteStudent={this.deleteStudent}
+      key={currentStudent._id}
+        />
+  })
+}
 
   render() {
     return (
@@ -49,10 +89,10 @@ export default class indexStudent extends Component {
               <th scope="col">Operation</th>
             </tr>
           </thead>
+          <tbody>
+            { this.studentList() }
+          </tbody>
         </table>
-        {this.state.students.map((student, index) => (
-          <StudentItem key={index} content={student} />
-        ))}
       </div>
     );
   }

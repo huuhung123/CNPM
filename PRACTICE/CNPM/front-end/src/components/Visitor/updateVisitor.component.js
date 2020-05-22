@@ -9,18 +9,24 @@ class updateVisitor extends Component {
           name: "",
           age: "",
         };
+
         this.onChangeName = this.onChangeName.bind(this)
         this.onchangeAge = this.onchangeAge.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
     componentDidMount() {
-        this.setState({
-            name: '123',
-            age: '123',
-        })
+      const { match } = this.props
+      axios.get(`http://localhost:5000/visitor/update/${match.params._id}`)
+      .then(res => {
+          this.setState({
+            name: res.data.name,
+            age: res.data.age
+          })
+      })
+      .catch(err => console.log(err))
     }
-  
+
     onChangeName(e) {
       this.setState({
         ...this.state,
@@ -42,17 +48,15 @@ class updateVisitor extends Component {
           name: this.state.name,
           age: this.state.age
       }
+       
       const { history, match } = this.props
 
       axios.post(`http://localhost:5000/visitor/update/${match.params._id}`, newVisitor)
         .then(res => history.push('/visitor'))
         .catch(err => console.log(err))
-  
-      
     }  
 
   render() {
-    // const { history, match } = this.props;
 
     return (
         <div>

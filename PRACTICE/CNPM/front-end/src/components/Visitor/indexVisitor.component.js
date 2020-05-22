@@ -1,7 +1,31 @@
 import React, { Component } from "react";
-import VisitorItem from "./visitorItem.component";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
+const VisitorItem = (props) => (
+  <tr>
+    <th scope="row">{props.content._id}</th>
+      <td>{props.content.name}</td>
+      <td>{props.content.age}</td>
+      <td>{props.content.createdTime}</td>
+      <td>
+        <Link
+          to={`/visitor/update/${props.content._id}`}
+          className="btn btn-warning"
+        > 
+          {" "}
+          Update{" "}
+        </Link>
+        <Link
+          to={`/visitor/delete/${props.content._id}`}
+          className="btn btn-danger"
+        >
+          {" "}
+          Delete{" "}
+        </Link>
+      </td>
+    </tr>
+)
 
 export default class indexVisitor extends Component {
   constructor(props) {
@@ -13,17 +37,34 @@ export default class indexVisitor extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5000/visitor").then((res) => {
+    axios.get("http://localhost:5000/visitor")
+      .then((res) => {
       if (res.data.length > 0) {
         this.setState({
-          ...this.state.visitors.push(...res.data),
+          visitors: res.data
         });
       }
-    });
-    // console.log(this.state)
+    })
+    .catch(err => console.log(err))
   }
 
+   deleteVisttor(id) {
+    axios.delete('http://localhost:5000/visitor/'+ id)
+    .then(res => console.log(res.data));
+
+    this.setState({
+       visitors: this.state.visitors.filter(el => el._id !== id)
+    })
+}
   
+  visitorList() {
+    return this.state.visitors.map(currentVisitor => {
+      return <VisitorItem content={currentVisitor}
+      deleteVisttor={this.deleteVisttor}
+      key={currentVisitor._id}
+        />
+  })
+  }
 
   render() {
     return (
@@ -49,10 +90,10 @@ export default class indexVisitor extends Component {
               <th scope="col">Operation</th>
             </tr>
           </thead>
+          <tbody>
+            { this.visitorList() }
+          </tbody>
         </table>
-        {this.state.visitors.map((visitor, index) => (
-          <VisitorItem key={index} content={visitor} />
-        ))}
       </div>
     );
   }

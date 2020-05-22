@@ -1,32 +1,23 @@
 import React, { Component } from "react";
 import axios from "axios"
-import { withRouter } from "react-router-dom";
+// import { withRouter } from "react-router-dom";
 
 class createDuty extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: "",
-      time: "",
-      phone: "",
-      place: "",
-    };
+      name: '',
+      time: '',
+      phone: '',
+      place: '',
+    }
 
     this.onChangeName = this.onChangeName.bind(this)
     this.onChangePhone = this.onChangePhone.bind(this)
     this.onChangePlace = this.onChangePlace.bind(this)
     this.onChangeTime = this.onChangeTime.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-  }
-
-  componentDidMount() {
-      this.setState({
-          name: '123',
-          time: '123',
-          phone: '123',
-          place: '123'
-      })
   }
 
   onChangeName(e) {
@@ -40,7 +31,7 @@ class createDuty extends Component {
     this.setState({
       ...this.state,
       time: e.target.value,
-    });
+    })
   }
 
   onChangePhone(e) {
@@ -57,8 +48,16 @@ class createDuty extends Component {
     });
   }
 
+//   changeHandler = e => {
+//     this.setState({
+//         [e.target.name]: e.target.name
+//     })
+// }
+
   onSubmit(e) {
+
     e.preventDefault();
+    const { history } = this.props
 
     const newDuty = {
         name: this.state.name,
@@ -71,8 +70,9 @@ class createDuty extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log(err))
 
-    this.props.history.push('/duty')
+    history.push('/duty')
   }
+
 
 
   render() {
@@ -105,4 +105,4 @@ class createDuty extends Component {
   }
 }
 
-export default withRouter(createDuty)
+export default createDuty

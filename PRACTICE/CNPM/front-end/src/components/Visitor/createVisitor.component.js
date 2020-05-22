@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios"
-import { withRouter } from "react-router-dom";
 
 class createVisitor extends Component {
   constructor(props) {
@@ -16,12 +15,12 @@ class createVisitor extends Component {
     this.onSubmit = this.onSubmit.bind(this)
   }
 
-  componentDidMount() {
-      this.setState({
-          name: '123',
-          age: '123',
-      })
-  }
+  // componentDidMount() {
+  //     this.setState({
+  //         name: '123',
+  //         age: '123',
+  //     })
+  // }
 
   onChangeName(e) {
     this.setState({
@@ -38,7 +37,9 @@ class createVisitor extends Component {
   }
 
   onSubmit(e) {
+    
     e.preventDefault();
+    const { history } = this.props
 
     const newVisitor = {
         name: this.state.name,
@@ -49,8 +50,9 @@ class createVisitor extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log(err))
 
-    this.props.history.push('/visitor')
+    history.push('/visitor')
   }
+
 
 
   render() {
@@ -75,4 +77,4 @@ class createVisitor extends Component {
   }
 }
 
-export default withRouter(createVisitor)
+export default createVisitor

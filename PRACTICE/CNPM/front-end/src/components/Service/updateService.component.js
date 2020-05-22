@@ -6,27 +6,34 @@ class updateService extends Component {
         super(props);
     
         this.state = {
-          name: "",
-          service: "",
-          phone: "",
-          place: "",
-        };
+          name: '',
+          service: '',
+          phone: '',
+          place: '',
+        }
+
         this.onChangeName = this.onChangeName.bind(this)
         this.onChangePhone = this.onChangePhone.bind(this)
         this.onChangePlace = this.onChangePlace.bind(this)
         this.onchangeService = this.onchangeService.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
+    
 
     componentDidMount() {
-        this.setState({
-            name: '123',
-            service: '123',
-            phone: '123',
-            place: '123'
-        })
-    }
-  
+      const { match } = this.props
+      axios.get(`http://localhost:5000/service/update/${match.params._id}`)
+      .then(res => {
+          this.setState({
+            name: res.data.name,
+            service: res.data.service,
+            phone: res.data.phone,
+            place: res.data.place
+          })
+      })
+      .catch(err => console.log(err))
+     }
+
     onChangeName(e) {
       this.setState({
         ...this.state,
@@ -69,13 +76,9 @@ class updateService extends Component {
       axios.post(`http://localhost:5000/service/update/${match.params._id}`, newService)
         .then(res => history.push('/service'))
         .catch(err => console.log(err))
-  
-      
     }  
 
   render() {
-    // const { history, match } = this.props;
-
     return (
         <div>
         <h2>You are on the Update Service component</h2>
@@ -94,7 +97,7 @@ class updateService extends Component {
              </div>
              <div className="form-group">
                  <label className="font-weight-bold">Place:</label>
-                 <input type="text" required className="form-control" name="place" value={this.state.pl}  onChange={this.onChangePlace} />
+                 <input type="text" required className="form-control" name="place" value={this.state.place}  onChange={this.onChangePlace} />
              </div>
              <div className="form-group">
                  <input type="submit" value="Update Service" className="btn btn-primary" />

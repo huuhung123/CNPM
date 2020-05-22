@@ -7,20 +7,13 @@ class createStudent extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      age: "",
+      name: '',
+      age: '',
     };
 
     this.onChangeName = this.onChangeName.bind(this)
     this.onchangeAge = this.onchangeAge.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-  }
-
-  componentDidMount() {
-      this.setState({
-          name: '123',
-          age: '123',
-      })
   }
 
   onChangeName(e) {
@@ -39,6 +32,7 @@ class createStudent extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    const { history } = this.props
 
     const newStudent = {
         name: this.state.name,
@@ -49,7 +43,7 @@ class createStudent extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log(err))
 
-    this.props.history.push('/student')
+    history.push('/student')
   }
 
 
@@ -75,4 +69,4 @@ class createStudent extends Component {
   }
 }
 
-export default withRouter(createStudent)
+export default createStudent

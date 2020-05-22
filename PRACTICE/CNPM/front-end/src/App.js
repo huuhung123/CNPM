@@ -43,17 +43,19 @@ function App() {
         <Navbar />
         <br />
         <Switch>
+            <Route path="/" exact component={indexHomePage} />
+
             <Route path="/duty" exact component={indexDuty} />
             <Route path="/duty/create" exact component={createDuty} />
             <Route path="/duty/update/:_id" exact component={updateDuty} />
-            <Route path="/duty/delete/:_id" exact component={deleteDuty} />
             <Route path="/duty/search" exact component={searchDuty} />
-            
+            <Route path="/duty/delete/:_id" exact component={deleteDuty} />
+
             <Route path="/service" exact component={indexService} />
             <Route path="/service/create" exact component={createService} />
             <Route path="/service/update/:_id" exact component={updateService} />
             <Route path="/service/delete/:_id" exact component={deleteService} />
-
+              
             <Route path="/student" exact component={indexStudent} />
             <Route path="/student/create" exact component={createStudent} />
             <Route path="/student/update/:_id" exact component={updateStudent} />

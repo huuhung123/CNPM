@@ -6,19 +6,26 @@ class updateStudent extends Component {
         super(props);
     
         this.state = {
-          name: "",
-          age: "",
+          name: '',
+          age: '',
         };
+
         this.onChangeName = this.onChangeName.bind(this)
         this.onchangeAge = this.onchangeAge.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+
     componentDidMount() {
-        this.setState({
-            name: '123',
-            age: '123',
-        })
+      const { match } = this.props
+      axios.get(`http://localhost:5000/student/update/${match.params._id}`)
+      .then(res => {
+          this.setState({
+            name: res.data.name,
+            age: res.data.age
+          })
+      })
+      .catch(err => console.log(err))
     }
   
     onChangeName(e) {
@@ -52,7 +59,6 @@ class updateStudent extends Component {
     }  
 
   render() {
-    // const { history, match } = this.props;
 
     return (
         <div>

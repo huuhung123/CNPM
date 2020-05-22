@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios"
-import { withRouter } from "react-router-dom";
 
 class createService extends Component {
   constructor(props) {
@@ -13,20 +12,12 @@ class createService extends Component {
       place: "",
     };
 
+
     this.onChangeName = this.onChangeName.bind(this)
     this.onChangeService = this.onChangeService.bind(this)
     this.onChangePhone = this.onChangePhone.bind(this)
     this.onChangePlace = this.onChangePlace.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
-  }
-
-  componentDidMount() {
-      this.setState({
-          name: '123',
-          service: '123',
-          phone: '123',
-          place: '123'
-      })
   }
 
   onChangeName(e) {
@@ -59,6 +50,7 @@ class createService extends Component {
 
   onSubmit(e) {
     e.preventDefault();
+    const { history } = this.props
 
     const newService = {
         name: this.state.name,
@@ -71,7 +63,7 @@ class createService extends Component {
       .then(res => console.log(res.data))
       .catch(err => console.log(err))
 
-    this.props.history.push('/service')
+    history.push('/service')
   }
 
 
@@ -105,4 +97,4 @@ class createService extends Component {
   }
 }
 
-export default withRouter(createService)
+export default createService

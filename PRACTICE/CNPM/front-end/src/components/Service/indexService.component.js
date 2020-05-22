@@ -1,7 +1,34 @@
 import React, { Component } from "react";
-import ServiceItem from "./serviceItem.component";
 import axios from "axios";
 import { Link } from "react-router-dom";
+
+const ServiceItem = (props) => (
+  <tr>
+  <th scope="row">{props.content._id}</th>
+  <td>{props.content.name}</td>
+  <td>{props.content.service}</td>
+  <td>{props.content.phone}</td>
+  <td>{props.content.place}</td>
+  <td>{props.content.createdTime}</td>
+  <td>{props.content.updatedTime}</td>
+  <td>
+    <Link
+      to={`/service/update/${props.content._id}`}
+      className="btn btn-warning"
+    >
+      {" "}
+      Update{" "}
+    </Link>
+    <Link
+      to={`/service/delete/${props.content._id}`}
+      className="btn btn-danger" 
+    >
+      {" "}
+      Delete{" "}
+    </Link>
+  </td>
+</tr>
+)
 
 export default class indexService extends Component {
   constructor(props) {
@@ -16,14 +43,30 @@ export default class indexService extends Component {
     axios.get("http://localhost:5000/service").then((res) => {
       if (res.data.length > 0) {
         this.setState({
-          ...this.state.services.push(...res.data),
+          services: res.data
         });
       }
-    });
-    // console.log(this.state)
+    })
+    .catch(err => console.log(err))
   }
 
-  
+  deleteService(id) {
+    axios.delete('http://localhost:5000/service/'+ id)
+    .then(res => console.log(res.data));
+
+    this.setState({
+        services: this.state.services.filter(el => el._id !== id)
+    })
+}
+
+serviceList() {
+  return this.state.services.map(currentService => {
+      return <ServiceItem content={currentService}
+      deleteDuty={this.deleteService}
+      key={currentService._id}
+        />
+  })
+}
 
   render() {
     return (
@@ -52,10 +95,10 @@ export default class indexService extends Component {
               <th scope="col">Operation</th>
             </tr>
           </thead>
+          <tbody>
+            { this.serviceList() }
+          </tbody>
         </table>
-        {this.state.services.map((service, index) => (
-          <ServiceItem key={index} content={service} />
-        ))}
       </div>
     );
   }

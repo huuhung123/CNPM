@@ -22,3 +22,4 @@ export const deleteDuty = (props) => {
 }
 export default deleteDuty
 
+

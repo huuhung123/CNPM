@@ -6,11 +6,12 @@ class updateDuty extends Component {
         super(props);
     
         this.state = {
-          name: "",
-          time: "",
-          phone: "",
-          place: "",
-        };
+          name: '',
+          time: '',
+          phone: '',
+          place: '',
+        }
+
         this.onChangeName = this.onChangeName.bind(this)
         this.onChangePhone = this.onChangePhone.bind(this)
         this.onChangePlace = this.onChangePlace.bind(this)
@@ -19,12 +20,17 @@ class updateDuty extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            name: '123',
-            time: '123',
-            phone: '123',
-            place: '123'
+        const { match } = this.props
+        axios.get(`http://localhost:5000/duty/update/${match.params._id}`)
+        .then(res => {
+            this.setState({
+              name: res.data.name,
+              time: res.data.time,
+              phone: res.data.phone,
+              place: res.data.place
+            })
         })
+        .catch(err => console.log(err))
     }
   
     onChangeName(e) {
@@ -74,8 +80,6 @@ class updateDuty extends Component {
     }  
 
   render() {
-    // const { history, match } = this.props;
-
     return (
         <div>
         <h2>You are on the Update Duty component</h2>
@@ -94,7 +98,7 @@ class updateDuty extends Component {
              </div>
              <div className="form-group">
                  <label className="font-weight-bold">Place:</label>
-                 <input type="text" required className="form-control" name="place" value={this.state.pl}  onChange={this.onChangePlace} />
+                 <input type="text" required className="form-control" name="place" value={this.state.place}  onChange={this.onChangePlace} />
              </div>
              <div className="form-group">
                  <input type="submit" value="Update Duty" className="btn btn-primary" />
