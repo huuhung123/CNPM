@@ -37,7 +37,7 @@ module.exports.getUpdate = (req, res) => {
   Visitor
     .findById(req.params.id)
     .then(visitor => {
-      res.json("Duty was found")
+      res.json(visitor)
       // res.render("visitor/update", {
       //   visitor: visitor
       // })

@@ -38,7 +38,7 @@ module.exports.getUpdate = (req, res) => {
   Student
     .findById(req.params.id)
     .then(student => {
-      res.json("Duty was found")
+      res.json(student)
       // res.render("student/update", {
       //   student: student
       // })
@@ -52,7 +52,6 @@ module.exports.postUpdate = (req, res) => {
   updatedStudent.age = req.body.age;
 
   const query = { _id: req.params.id };
-
   Student
     .update(query, updatedStudent)
     // .then(() => res.redirect("/student"))

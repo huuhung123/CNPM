@@ -42,7 +42,7 @@ module.exports.getUpdate = (req, res) => {
     //     service: service,
     //   });
     // })
-    .then(() => res.json("Service was found"))
+    .then((service) => res.json(service))
     .catch((err) => console.log(err));
 };
 

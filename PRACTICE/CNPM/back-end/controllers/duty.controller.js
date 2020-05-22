@@ -104,8 +104,8 @@ module.exports.getUpdate = (req, res) => {
   // });
   Duty
     .findById(req.params._id)
-    .then(() => {
-      res.json("Duty was found")
+    .then((duty) => {
+      res.json(duty)
       // res.render("duty/update", {
       //   duty: duty
       // })
